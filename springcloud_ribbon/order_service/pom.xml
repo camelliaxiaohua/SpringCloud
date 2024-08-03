@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 项目的基本配置文件 -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <!-- 模型版本，指定使用 Maven POM 4.0.0 模型 -->
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- 父项目定义，继承父项目的配置 -->
+    <parent>
+        <!-- 父项目的 groupId -->
+        <groupId>camellia</groupId>
+        <!-- 父项目的 artifactId -->
+        <artifactId>springcloud_ribbon</artifactId>
+        <!-- 父项目的版本 -->
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <!-- 当前项目的基本信息 -->
+    <groupId>camellia</groupId>
+    <artifactId>order_service</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>order_service</name>
+    <description>order_service</description>
+
+    <!-- 项目属性 -->
+    <properties>
+        <!-- 指定 Java 版本 -->
+        <java.version>21</java.version>
+    </properties>
+
+    <!-- 项目依赖 -->
+    <dependencies>
+        <!-- MySQL 连接器依赖，用于连接 MySQL 数据库 -->
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+        </dependency>
+        <!-- Lombok 依赖，用于简化 Java 代码，如生成 getter/setter、构造函数等 -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <!-- Spring Cloud Netflix Eureka Client 依赖，用于将服务注册到 Eureka 注册中心 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+
+
+        <!-- MyBatis Spring Boot 启动器依赖，用于集成 MyBatis 和 Spring Boot -->
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+        </dependency>
+        <!-- Spring Boot Web Starter 依赖，用于创建 Web 应用 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>
