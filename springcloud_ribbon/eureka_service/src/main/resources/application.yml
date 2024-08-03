@@ -1,0 +1,23 @@
+server:
+  port: 9986 # 指定服务的端口号为 9986。服务将监听这个端口来接收来自客户端的请求。
+
+spring:
+  application:
+    # 定义 Spring Boot 应用的名称，这里设置为 "eureka-server"。
+    # 这个名称通常用于服务发现和标识应用。
+    name: eureka-server
+
+eureka:
+  client:
+    service-url:
+      # Eureka 服务器的地址，客户端将使用这个地址与 Eureka 服务器进行通信。这里配置的地址是本地地址，即当前服务运行在本机的 9986 端口。
+      defaultZone: http://127.0.0.1:9986/eureka
+
+   #配置此属性为 false，表示这个 Eureka 服务器不会将自己注册到其他 Eureka 服务器中。
+   #通常用于启动独立的 Eureka 服务器实例，不需要与其他 Eureka 服务器进行注册。
+    register-with-eureka: false
+
+
+    # 配置此属性为 false，表示这个 Eureka 服务器不会从其他 Eureka 服务器拉取服务注册表信息。
+    # 这样配置的 Eureka 服务器只处理注册到它自己的服务，而不会主动获取其他服务器的注册信息。
+    fetch-registry: false
