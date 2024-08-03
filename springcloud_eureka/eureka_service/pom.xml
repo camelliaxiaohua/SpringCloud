@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <!-- 设置项目的父级 POM 文件，这里使用的是 Spring Boot 的父级 POM -->
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.3.2</version> <!-- 父级 POM 的版本 -->
+        <relativePath/> <!-- 从 Maven 仓库中查找父级 POM -->
+    </parent>
+
+    <!-- 项目自己的 groupId、artifactId 和版本信息 -->
+    <groupId>camellia</groupId> <!-- 项目的 groupId -->
+    <artifactId>eureka_service</artifactId> <!-- 项目的 artifactId -->
+    <version>0.0.1-SNAPSHOT</version> <!-- 项目的版本 -->
+    <name>eureka_service</name> <!-- 项目的名称 -->
+    <description>eureka_service</description> <!-- 项目的描述 -->
+
+    <!-- 定义项目中使用的属性，例如 Java 版本 -->
+    <properties>
+        <java.version>21</java.version> <!-- 设置项目使用的 Java 版本 -->
+    </properties>
+
+    <!-- 项目的具体依赖 -->
+    <dependencies>
+        <!-- 引入 Spring Cloud Netflix Eureka Server 依赖，用于启动 Eureka Server -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+            <version>4.1.3</version> <!-- Eureka Server 的版本 -->
+        </dependency>
+
+        <!-- 引入 Spring Cloud 的 BOM（Bill of Materials）POM 文件，用于统一管理 Spring Cloud 相关依赖的版本 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-dependencies</artifactId>
+            <version>2023.0.3</version> <!-- Spring Cloud 版本 -->
+            <type>pom</type> <!-- 指定这是一个 POM 类型的依赖 -->
+            <scope>import</scope> <!-- 指定依赖的范围为 import -->
+        </dependency>
+
+        <!-- 引入 Spring Boot Web Starter 依赖，提供构建 Web 应用所需的基本组件 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+    </dependencies>
+</project>

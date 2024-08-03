@@ -1,0 +1,29 @@
+server:
+  port: 8557
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/cloud?useSSL=false
+    username: root
+    password: 24211
+  application:
+    name: user-service
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:9986/eureka
+  instance:
+    prefer-ip-address: true # 优先使用 IP 地址进行注册
+
+mybatis:
+  type-aliases-package: users.pojo
+  configuration:
+    map-underscore-to-camel-case: true
+
+logging:
+  level:
+    users: debug
+  pattern:
+    dateformat: MM-dd HH:mm:ss:SSS

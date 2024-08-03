@@ -1,0 +1,13 @@
+server:
+  port: 9986 # 服务端口
+
+spring:
+  application:
+    name: eureka-server # Eureka 服务名称
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:9986/eureka # Eureka 服务地址
+    register-with-eureka: false # 不将自己注册到 Eureka
+    fetch-registry: false # 不从 Eureka 拉取信息列表
