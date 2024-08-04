@@ -1,0 +1,13 @@
+spring:
+  profiles:
+    active: dev # 活动配置文件的名称，指定当前使用的配置文件环境，这里设置为 "dev"，表示开发环境
+
+  cloud:
+    nacos:
+      discovery:   # Nacos 服务发现配置
+        server-addr: 192.168.80.1:80/nacos
+        # Nacos 服务器地址，用于服务发现，格式为 IP 地址和端口号，后跟 Nacos 的上下文路径。
+        #这里的 IP 地址 `192.168.80.1` 和端口 `80` 是 Nginx 的地址，Nginx 将请求转发到实际的 Nacos 服务地址。
+
+      config:
+        file-extension: yaml # 配置文件的后缀名，指定使用 YAML 格式的配置文件

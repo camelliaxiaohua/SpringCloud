@@ -1,0 +1,63 @@
+server:
+  port: 8563 # 服务启动端口，应用将监听这个端口来接收请求
+
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource # 使用 Druid 数据源
+    driver-class-name: com.mysql.cj.jdbc.Driver # JDBC 驱动类名，指定使用 MySQL 驱动
+    url: jdbc:mysql://127.0.0.1:3306/cloud?useSSL=false # 数据库连接 URL，连接到本地 MySQL 数据库的 cloud 数据库，禁用 SSL
+    username: root # 数据库用户名，用于连接 MySQL 数据库
+    password: 24211 # 数据库密码，与用户名一起用于连接 MySQL 数据库
+
+    # Druid 数据源的其他配置
+    druid:
+      initial-size: 5 # 初始连接数
+      min-idle: 10 # 最小连接池数量
+      max-active: 20 # 最大连接池数量
+      max-wait: 60000 # 配置获取连接等待超时的时间
+      time-between-eviction-runs-millis: 60000 # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      min-evictable-idle-time-millis: 300000 # 配置一个连接在池中最小生存的时间，单位是毫秒
+      max-evictable-idle-time-millis: 900000 # 配置一个连接在池中最大生存的时间，单位是毫秒
+      validation-query: SELECT 1 FROM DUAL # 配置检测连接是否有效
+      test-while-idle: true # 申请连接的时候检测，如果空闲时间大于 timeBetweenEvictionRunsMillis，执行 validationQuery 检测连接是否有效。
+      test-on-borrow: false # 配置从连接池获取连接时，是否检查连接有效性
+      test-on-return: false # 配置向连接池归还连接时，是否检查连接有效性
+      pool-prepared-statements: true # 打开 PreparedStatement 的缓存
+      max-pool-prepared-statement-per-connection-size: 20 # 指定每个连接上 PreparedStatement 的缓存大小
+      filters: stat,wall,log4j # 配置监控统计拦截的 filters
+      use-global-data-source-stat: true # 合并多个 DruidDataSource 的监控数据
+      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500; # 连接属性，启用 SQL 合并和慢 SQL 记录
+
+  application:
+    name: order-service # 定义应用程序名称，用于 nacos 服务注册和标识
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.80.1:80/nacos # Nacos 地址，用于服务发现
+      config:
+        file-extension: yaml # 配置文件的后缀名，指定使用 YAML 格式的配置文件
+
+mybatis:
+  type-aliases-package: orders.pojo # MyBatis 别名包，指定 MyBatis 使用的别名包，用于简化实体类的引用
+  configuration:
+    map-underscore-to-camel-case: true # 启用下划线转驼峰命名规则，将数据库表字段名中的下划线转为驼峰式属性名
+
+logging:
+  level:
+    orders: debug # 设置 `orders` 包的日志级别为 `debug`，用于更详细的调试日志输出
+  pattern:
+    dateformat: MM-dd HH:mm:ss:SSS # 设置日志输出的日期格式为月-日 时:分:秒:毫秒
+
+feign:
+#  client:
+#    config:
+#      default: # default全局的配置
+#        loggerLevel: BASIC # 日志级别，BASIC就是基本的请求和响应信息
+  httpclient:
+    enabled: true # 开启feign对HttpClient的支持
+    max-connections: 200 # 最大的连接数
+    max-connections-per-route: 50 # 每个路径的最大连接数
+
+user-service:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.alibaba.cloud.nacos.ribbon.NacosRule # 负载均衡规则，用于配置 Ribbon 负载均衡
