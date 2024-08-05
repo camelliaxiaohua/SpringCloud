@@ -1,0 +1,42 @@
+server:
+  port: 8557 # 服务启动端口，应用将监听这个端口来接收请求
+
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource # 配置使用的数据库连接池类型为 Druid
+    driver-class-name: com.mysql.cj.jdbc.Driver # 指定使用的 MySQL JDBC 驱动类
+    url: jdbc:mysql://127.0.0.1:3306/cloud?useSSL=false # 数据库连接 URL，连接到本地 MySQL 数据库的 `cloud` 数据库，禁用 SSL
+    username: root # 数据库用户名，用于连接 MySQL 数据库
+    password: 24211 # 数据库密码，与用户名一起用于连接 MySQL 数据库
+
+    # Druid 数据源配置
+    initialSize: 5 # 初始连接数，即初始化时创建的数据库连接数量
+    minIdle: 10 # 最小连接池数量，连接池中保持的最小空闲连接数量
+    maxActive: 20 # 最大连接池数量，连接池中允许的最大连接数量
+    maxWait: 60000 # 配置获取连接等待超时的时间，单位是毫秒
+    timeBetweenEvictionRunsMillis: 60000 # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+    minEvictableIdleTimeMillis: 300000 # 配置一个连接在池中最小生存的时间，单位是毫秒
+    maxEvictableIdleTimeMillis: 900000 # 配置一个连接在池中最大生存的时间，单位是毫秒
+    validationQuery: SELECT 1 FROM DUAL # 配置检测连接是否有效的 SQL 查询
+    testWhileIdle: true # 申请连接的时候检测，如果空闲时间大于 `timeBetweenEvictionRunsMillis`，执行 `validationQuery` 检测连接是否有效
+    testOnBorrow: false # 配置从连接池获取连接时，是否检查连接有效性，true 表示每次都检查；false 表示不检查，检查会降低性能
+    testOnReturn: false # 配置向连接池归还连接时，是否检查连接有效性，true 表示每次都检查；false 表示不检查，检查会降低性能
+    poolPreparedStatements: true # 打开 PreparedStatement 缓存，并指定每个连接上 PSCache 的大小
+    maxPoolPreparedStatementPerConnectionSize: 20 # 每个连接上最大缓存的 PreparedStatement 数量
+    filters: stat,wall,log4j # 配置监控统计拦截的 filters，'stat' 用于统计，'wall' 用于防火墙，'log4j' 用于日志
+    useGlobalDataSourceStat: true # 合并多个 DruidDataSource 的监控数据
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500; # 打开 SQL 合并功能，记录慢 SQL
+
+  application:
+    name: user-service # 定义应用程序名称，用于 nacos 服务注册和标识
+
+mybatis:
+  type-aliases-package: users.pojo # MyBatis 别名包，指定 MyBatis 使用的别名包，用于简化实体类的引用
+  configuration:
+    map-underscore-to-camel-case: true # 启用下划线转驼峰命名规则，将数据库表字段名中的下划线转为驼峰式属性名
+
+logging:
+  level:
+    users: debug # 设置 `users` 包的日志级别为 `debug`，用于更详细的调试日志输出
+  pattern:
+    dateformat: MM-dd HH:mm:ss:SSS # 设置日志输出的日期格式为月-日 时:分:秒:毫秒
