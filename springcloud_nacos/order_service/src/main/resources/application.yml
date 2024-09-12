@@ -34,8 +34,10 @@ spring:
     nacos:
       discovery:
         server-addr: 192.168.80.1:80/nacos # Nacos 地址，用于服务发现
+      # 从Nacos服务器拉取YAML格式的配置文件
       config:
         file-extension: yaml # 配置文件的后缀名，指定使用 YAML 格式的配置文件
+        
 
 mybatis:
   type-aliases-package: orders.pojo # MyBatis 别名包，指定 MyBatis 使用的别名包，用于简化实体类的引用
